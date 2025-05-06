@@ -287,20 +287,22 @@ modeCards.forEach(card => {
 
 // Mostrar mensagem se não houver resultados
 if (modes.length > 0 && !hasResults) {
- // Verificar se a mensagem já existe
- let noResultsMsg = document.getElementById('noSearchResults');
- if (!noResultsMsg) {
-     noResultsMsg = document.createElement('div');
-     noResultsMsg.id = 'noSearchResults';
-     noResultsMsg.className = 'text-center py-8 text-gray-500';
-     noResultsMsg.innerHTML = `
-         <div class="bg-gray-50 p-4 rounded-xl inline-block mb-3">
-             <i class="fas fa-search text-3xl text-gray-400"></i>
-         </div>
-         <p class="text-lg">Nenhum modo encontrado para "${searchTerm}"</p>
-         <p class="text-gray-400 text-sm mt-1">Tente outra palavra-chave</p>
-     `;
-     modesList.appendChild(noResultsMsg);
+    let noResultsMsg = document.getElementById('noSearchResults');
+    if (!noResultsMsg) {
+        noResultsMsg = document.createElement('div');
+        noResultsMsg.id = 'noSearchResults';
+        // Classe atualizada ↓
+        noResultsMsg.className = 'col-span-full w-full text-center py-8 text-gray-500';
+        noResultsMsg.innerHTML = `
+            <div class="flex flex-col items-center justify-center">
+                <div class="bg-gray-50 p-4 rounded-xl inline-block mb-3">
+                    <i class="fas fa-search text-3xl text-gray-400"></i>
+                </div>
+                <p class="text-lg">Nenhum modo encontrado para "${searchTerm}"</p>
+                <p class="text-gray-400 text-sm mt-1">Tente outra palavra-chave</p>
+            </div>
+        `;
+        modesList.appendChild(noResultsMsg);
  } else {
      // Atualizar a mensagem com o termo de busca atual
      noResultsMsg.querySelector('p').textContent = `Nenhum modo encontrado para "${searchTerm}"`;
