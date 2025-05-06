@@ -445,7 +445,6 @@ function showPopupBlockerModal() {
  function launchMode(mode) {
  // Count how many URLs we have
  const urlCount = mode.urls.length;
- showNotification('Lançando...', `Abrindo ${urlCount} site${urlCount !== 1 ? 's' : ''} do modo "${mode.name}"`, 'info');
  
  // Process URLs
  const processedUrls = mode.urls.map(url => {
