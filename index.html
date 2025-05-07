@@ -147,15 +147,86 @@
                 <div id="modesList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Cards de modos serão gerados aqui via JavaScript -->
                 </div>
-                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mt-4 mb-6 rounded-md">
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-info-circle text-blue-400"></i>
+                <div id="popupTip" class="group bg-white border border-blue-100 shadow-sm rounded-lg overflow-hidden mt-4 mb-6 hover:shadow-md transition-all">
+                    <!-- Área principal da dica - toda área é clicável -->
+                    <div class="flex items-center p-3.5 cursor-pointer" onclick="togglePopupHelp()">
+                        <div class="bg-blue-50 p-2.5 rounded-lg mr-3.5 transition-colors">
+                            <i class="fas fa-lightbulb text-blue-500"></i>
                         </div>
-                        <div class="ml-3">
-                            <p class="text-sm text-blue-700">
-                                <strong>Dica:</strong> Essa aplicação utiliza pop-ups para abrir seus sites. Para melhor experiência, certifique-se de que seu navegador permite pop-ups para o StartPack.
-                            </p>
+                        <p class="text-gray-700 text-sm flex-grow pr-2">
+                            Habilite <span class="font-medium text-blue-600">pop-ups</span> para o StartPack para uma experiência ideal.
+                        </p>
+                        <div class="text-blue-500 transition-transform transform" id="tipArrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Painel de ajuda expandível (inicialmente oculto) -->
+                    <div id="popupHelpPanel" class="hidden border-t border-blue-100 bg-blue-50/50">
+                        <div class="p-4">
+                            <h4 class="font-medium text-blue-800 text-sm mb-3 flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Como habilitar pop-ups no seu navegador
+                            </h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                                <!-- Chrome -->
+                                <div class="bg-white rounded-lg p-3 shadow-sm">
+                                    <h5 class="font-medium text-gray-700 text-xs mb-2 flex items-center">
+                                        <i class="fab fa-chrome text-blue-500 mr-2"></i>Chrome
+                                    </h5>
+                                    <ol class="text-xs text-gray-600 space-y-1 list-decimal pl-4">
+                                        <li>Configurações</li>
+                                        <li>Privacidade e segurança</li>
+                                        <li>Config. do site → Pop-ups</li>
+                                        <li>Adicionar o StartPack</li>
+                                    </ol>
+                                </div>
+                                
+                                <!-- Firefox -->
+                                <div class="bg-white rounded-lg p-3 shadow-sm">
+                                    <h5 class="font-medium text-gray-700 text-xs mb-2 flex items-center">
+                                        <i class="fab fa-firefox text-orange-500 mr-2"></i>Firefox
+                                    </h5>
+                                    <ol class="text-xs text-gray-600 space-y-1 list-decimal pl-4">
+                                        <li>Opções</li>
+                                        <li>Privacidade & Segurança</li>
+                                        <li>Permissões → Pop-ups</li>
+                                        <li>Adicionar exceção</li>
+                                    </ol>
+                                </div>
+                                
+                                <!-- Edge -->
+                                <div class="bg-white rounded-lg p-3 shadow-sm">
+                                    <h5 class="font-medium text-gray-700 text-xs mb-2 flex items-center">
+                                        <i class="fab fa-edge text-blue-600 mr-2"></i>Edge
+                                    </h5>
+                                    <ol class="text-xs text-gray-600 space-y-1 list-decimal pl-4">
+                                        <li>Configurações</li>
+                                        <li>Cookies e permissões</li>
+                                        <li>Pop-ups e redirecionamentos</li>
+                                        <li>Permitir → Adicionar</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="flex items-center">
+                                    <label class="inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="dontShowAgain" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                        <span class="ml-2 text-xs text-gray-600">Não mostrar novamente</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="space-x-2">
+                                    <button onclick="dismissTip(false)" class="text-xs bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-3 py-1.5 rounded-md transition-colors">
+                                        Fechar
+                                    </button>
+                                    <button onclick="dismissTip(true)" id="hideForeverBtn" disabled class="text-xs bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md transition-colors opacity-50 cursor-not-allowed">
+                                        Não mostrar mais
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -164,63 +235,72 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 mt-24 py-8 px-4 md:px-6">
-        <div class="container mx-auto max-w-4xl">
-            <!-- Top Section -->
-            <div class="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0 lg:space-x-6">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
-                    <div class="bg-gradient-to-br from-blue-500 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
-                        <i class="fas fa-rocket text-white text-lg"></i>
-                    </div>
-                    <span class="text-xl font-bold text-gray-800 whitespace-nowrap">
-                        Start<span class="text-indigo-600">Pack</span>
-                    </span>
-                </div>
+   <footer class="bg-gradient-to-r from-indigo-50 to-blue-50 border-t border-blue-100 mt-24 py-12 px-4 md:px-6 relative overflow-hidden">
+    <!-- Elementos decorativos de fundo -->
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
+        <div class="absolute top-10 left-10 w-32 h-32 rounded-full bg-blue-400"></div>
+        <div class="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-indigo-400"></div>
+        <div class="absolute top-1/4 right-1/4 w-20 h-20 rounded-full bg-blue-300"></div>
+    </div>
     
-                <!-- Links -->
-                <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-center">
-                    <a href="https://www.instagram.com/dev_inojoza_/" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-2 py-1">
-                        Desenvolvido &nbsp; <i class="fas fa-code text-xs md:text-sm mr-2"></i>
-                        <span class="whitespace-nowrap">Por Gabriel</span>
-                    </a>
-                    <div class="md:hidden w-full"></div> <!-- Line break mobile -->
-                    <a href="https://inojoza28.github.io/conexoes/" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-2 py-1">
-                        <i class="fas fa-envelope text-xs md:text-sm mr-2"></i>
-                        Contato
-                    </a>
-                    <a href="https://github.com/Inojoza28" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-2 py-1">
-                        <i class="fab fa-github text-xs md:text-sm mr-2"></i>
-                        GitHub
-                    </a>
+    <div class="container mx-auto max-w-4xl relative z-10">
+        <!-- Top Section -->
+        <div class="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0 lg:space-x-6">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 hover:scale-105 transition-transform duration-300 group">
+                <div class="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md shadow-blue-200 group-hover:shadow-blue-300 transition-all">
+                    <i class="fas fa-rocket text-white text-lg group-hover:rotate-12 transition-transform"></i>
                 </div>
+                <span class="text-xl font-bold text-gray-800 whitespace-nowrap">
+                    Start<span class="text-indigo-600">Pack</span>
+                    <span class="block text-xs font-medium text-blue-500 mt-0.5">Acesse tudo com um clique</span>
+                </span>
             </div>
-    
-            <!-- Bottom Section -->
-            <div class="mt-8 pt-6 border-t border-gray-100">
-                <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
-                    <!-- Copyright -->
-                    <p class="text-gray-500 text-xs md:text-sm text-center md:text-left flex-grow">
-                        © 2025 StartPack. Todos direitos reservados 
-                        <i class="fas fa-heart text-red-500 mx-1.5"></i>
-                    </p>
-    
-                    <!-- Social -->
-                    <div class="flex space-x-4 md:space-x-5">
-                        <a href="www.linkedin.com/in/gabrielinojoza" target="_blank" class="text-gray-500 hover:text-indigo-600 transition-colors text-sm md:text-base">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://www.instagram.com/dev_inojoza_/" target="_blank" class="text-gray-500 hover:text-indigo-600 transition-colors text-sm md:text-base">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://github.com/Inojoza28" target="_blank" class="text-gray-500 hover:text-indigo-600 transition-colors text-sm md:text-base">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-center">
+                <a href="https://www.instagram.com/dev_inojoza_/" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-3 py-2 rounded-lg hover:bg-white hover:shadow-sm">
+                    <i class="fas fa-code text-blue-500 mr-2"></i>
+                    <span class="whitespace-nowrap">Desenvolvido por Gabriel</span>
+                </a>
+                <div class="md:hidden w-full"></div> <!-- Line break mobile -->
+                <a href="https://inojoza28.github.io/conexoes/" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-3 py-2 rounded-lg hover:bg-white hover:shadow-sm">
+                    <i class="fas fa-envelope text-blue-500 mr-2"></i>
+                    Contato
+                </a>
+                <a href="https://github.com/Inojoza28" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-colors text-sm flex items-center px-3 py-2 rounded-lg hover:bg-white hover:shadow-sm">
+                    <i class="fab fa-github text-blue-500 mr-2"></i>
+                    GitHub
+                </a>
             </div>
         </div>
-    </footer>
+
+        <!-- Bottom Section -->
+        <div class="mt-8 pt-6 border-t border-blue-100">
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
+                <!-- Copyright -->
+                <p class="text-gray-500 text-xs md:text-sm text-center md:text-left flex-grow">
+                    © 2025 StartPack. Todos direitos reservados 
+                    <i class="fas fa-heart text-red-500 mx-1.5 hover:animate-pulse"></i>
+                    <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs ml-2">v1.0.0</span>
+                </p>
+
+                <!-- Social -->
+                <div class="flex space-x-3">
+                    <a href="www.linkedin.com/in/gabrielinojoza" target="_blank" class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center hover:shadow-md hover:scale-110 transition-all">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/dev_inojoza_/" target="_blank" class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center hover:shadow-md hover:scale-110 transition-all">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/Inojoza28" target="_blank" class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center hover:shadow-md hover:scale-110 transition-all">
+                        <i class="fab fa-github"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
 
     <!-- Edit Mode Modal -->
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -282,6 +362,7 @@
         </div>
     </div>
 
+    <script src="js/popups.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
