@@ -29,32 +29,41 @@
  
  // Initialize application
  document.addEventListener('DOMContentLoaded', () => {
-     loadModesFromStorage();
-     renderModesList();
-     setupEventListeners();
-     
-     // Handle ESC key to close modals
-     document.addEventListener('keydown', (e) => {
-         if (e.key === 'Escape') {
-             if (editModal && !editModal.classList.contains('hidden')) {
-                 closeEditModal();
-             }
-             if (siteLaunchModal && !siteLaunchModal.classList.contains('hidden')) {
-                 closeSiteLaunchModal();
-             }
-         }
-     });
-     
-     // Handle clicks outside modals
-     document.addEventListener('click', (e) => {
-         if (siteLaunchModal && !siteLaunchModal.classList.contains('hidden')) {
-             if (!e.target.closest('#siteLaunchModal > div') && !e.target.closest('.launch-btn')) {
-                 closeSiteLaunchModal();
-             }
-         }
-     });
- });
- 
+    loadModesFromStorage();
+    renderModesList();
+    setupEventListeners();
+    
+    // Verificar se existe algum campo de URL
+    const existingUrlInputs = urlContainer.querySelectorAll('.url-input');
+    if (existingUrlInputs.length === 0) {
+        // Se não existir nenhum, adicione o primeiro campo de URL
+        addUrlInput();
+    }
+    
+    // Atualizar o estado dos botões de remover em qualquer caso
+    updateRemoveButtonsState(urlContainer);
+    
+    // Handle ESC key to close modals
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (editModal && !editModal.classList.contains('hidden')) {
+                closeEditModal();
+            }
+            if (siteLaunchModal && !siteLaunchModal.classList.contains('hidden')) {
+                closeSiteLaunchModal();
+            }
+        }
+    });
+    
+    // Handle clicks outside modals
+    document.addEventListener('click', (e) => {
+        if (siteLaunchModal && !siteLaunchModal.classList.contains('hidden')) {
+            if (!e.target.closest('#siteLaunchModal > div') && !e.target.closest('.launch-btn')) {
+                closeSiteLaunchModal();
+            }
+        }
+    });
+});
  // Event Listeners
  function setupEventListeners() {
      // Add URL button
@@ -671,9 +680,5 @@ document.addEventListener('DOMContentLoaded', () => {
  function scrollToCreateSection() {
      document.getElementById('createSection').scrollIntoView({ behavior: 'smooth' });
  }
+
  
- // Initialize the first URL input
- addUrlInput();
- 
- // Update remove button state for initial URL input
- updateRemoveButtonsState(urlContainer);
