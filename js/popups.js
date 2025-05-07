@@ -49,3 +49,19 @@ function dismissTip(permanently) {
         document.getElementById('tipArrow').classList.remove('rotate-180');
     }
 }
+
+// INICIO PARA MAIS INFORMAÇÕES SOBRE O SITE 
+
+function scrollToAboutSection() {
+    const aboutSection = document.getElementById('aboutSection');
+    if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function scrollToCreateSection() {
+    const createSection = document.getElementById('createSection');
+    if (createSection) {
+        createSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
