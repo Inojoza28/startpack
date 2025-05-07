@@ -150,14 +150,14 @@
                 <div id="popupTip" class="group bg-white border border-blue-100 shadow-sm rounded-lg overflow-hidden mt-4 mb-6 hover:shadow-md transition-all">
                     <!-- Área principal da dica - toda área é clicável -->
                     <div class="flex items-center p-3.5 cursor-pointer" onclick="togglePopupHelp()">
-                        <div class="bg-blue-50 p-2.5 rounded-lg mr-3.5 transition-colors">
-                            <i class="fas fa-lightbulb text-blue-500"></i>
+                        <div class="bg-blue-50 p-2.5 rounded-lg mr-3.5 transition-colors group-hover:bg-blue-100">
+                            <i class="fas fa-lightbulb text-blue-500 text-sm md:text-base"></i>
                         </div>
-                        <p class="text-gray-700 text-sm flex-grow pr-2">
+                        <p class="text-gray-700 text-xs sm:text-sm flex-grow pr-2 leading-snug">
                             Habilite <span class="font-medium text-blue-600">pop-ups</span> para o StartPack para uma experiência ideal.
                         </p>
                         <div class="text-blue-500 transition-transform transform" id="tipArrow">
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down text-xs sm:text-sm"></i>
                         </div>
                     </div>
                     
@@ -165,7 +165,7 @@
                     <div id="popupHelpPanel" class="hidden border-t border-blue-100 bg-blue-50/50">
                         <div class="p-4">
                             <h4 class="font-medium text-blue-800 text-sm mb-3 flex items-center">
-                                <i class="fas fa-info-circle mr-2"></i>
+                                <i class="fas fa-info-circle mr-2 text-base"></i>
                                 Como habilitar pop-ups no seu navegador
                             </h4>
                             
@@ -210,19 +210,22 @@
                                 </div>
                             </div>
                             
-                            <div class="flex items-center justify-between mt-2">
-                                <div class="flex items-center">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 gap-3">
+                                <div class="flex items-center w-full sm:w-auto">
                                     <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" id="dontShowAgain" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
-                                        <span class="ml-2 text-xs text-gray-600">Não mostrar novamente</span>
+                                        <input type="checkbox" id="dontShowAgain" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 transition-colors">
+                                        <span class="ml-2 text-xs sm:text-sm text-gray-600">Não mostrar novamente</span>
                                     </label>
                                 </div>
                                 
-                                <div class="space-x-2">
-                                    <button onclick="dismissTip(false)" class="text-xs bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-3 py-1.5 rounded-md transition-colors">
+                                <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                                    <button onclick="dismissTip(false)" class="text-xs sm:text-sm bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-3 py-2 sm:py-1.5 rounded-md transition-all flex-grow text-center
+                                                   active:scale-95 transform transition-transform">
                                         Fechar
                                     </button>
-                                    <button onclick="dismissTip(true)" id="hideForeverBtn" disabled class="text-xs bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md transition-colors opacity-50 cursor-not-allowed">
+                                    <button onclick="dismissTip(true)" id="hideForeverBtn" disabled class="text-xs sm:text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 sm:py-1.5 rounded-md transition-all flex-grow text-center
+                                                   disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-500
+                                                   active:scale-95 transform transition-transform">
                                         Não mostrar mais
                                     </button>
                                 </div>
