@@ -42,7 +42,7 @@ Acesse todos os seus sites essenciais com um único clique! O StartPack é uma f
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/startpack.git
+   git clone https://github.com/inojoza28/startpack.git
    ```
 
 2. Abra o arquivo `index.html` no navegador:
